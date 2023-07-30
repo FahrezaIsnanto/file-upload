@@ -35,23 +35,26 @@ class FileUploadController extends Controller
     public function store(Request $request)
     {
         $name = $request->name;
+        $noRm = $request->no_rm;
         $file = $request->file('file');
+
         $extensions = $file->getClientOriginalExtension();
 
-        $fileName = $name.'.'.$extensions;
+        $fileName = $name . '.' . $extensions;
 
         $path = $file->storeAs(
-            'file_upload', $fileName
+            'file_upload/' . $noRm,
+            $fileName
         );
-        
+
         return  response()
-                   ->json(
-                    [
-                        "status" => true,
-                        "fileName" => $fileName,
-                        "path" => env('APP_URL').'/'.'storage/'.$path
-                    ]
-                   ) ;
+            ->json(
+                [
+                    "status" => true,
+                    "fileName" => $fileName,
+                    "path" => env('APP_URL') . '/' . 'storage/' . $path
+                ]
+            );
     }
 
     /**
