@@ -42,8 +42,8 @@ class FileUploadController extends Controller
 
         $fileName = $name . '.' . $extensions;
 
-        if (file_exists(storage_path('app/file_upload/' . $noRm . '/' . $fileName))) {
-            unlink(storage_path('app/file_upload/' . $noRm . '/' . $fileName));
+        if (file_exists(storage_path('app/public/file_upload/' . $noRm . '/' . $fileName))) {
+            unlink(storage_path('app/public/file_upload/' . $noRm . '/' . $fileName));
         }
 
         $path = $file->storeAs(
